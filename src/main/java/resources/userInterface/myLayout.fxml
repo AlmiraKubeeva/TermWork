@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="292.0" prefWidth="628.0" style="-fx-background-image: url(&quot;https://img.freepik.com/free-vector/horizontal-abstract-pastel-color-hologram-background-design_29865-3306.jpg&quot;);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.LayoutController">
+    <children>
+        <Button layoutX="468.0" layoutY="151.0" onAction="#handleButtonAction" prefHeight="29.0" prefWidth="103.0" style="-fx-background-color: #000;" text="Browse" textFill="#f3f5f4" />
+        <TextField fx:id="textField" layoutX="54.0" layoutY="151.0" prefHeight="29.0" prefWidth="399.0" />
+        <Label layoutX="54.0" layoutY="97.0" prefHeight="16.0" prefWidth="380.0" text=" Select the folder where you want to check for duplicates" />
+    </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</AnchorPane>
