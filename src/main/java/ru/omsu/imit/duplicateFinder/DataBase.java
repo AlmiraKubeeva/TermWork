@@ -13,7 +13,7 @@ public class DataBase {
     Map<String, String> hashSumToFileName;
     MultiValuedMap<String, String> digestToFilePaths;
 
-    private DataBase() {
+    public DataBase() {
         hashSumToFileName = new HashMap<>();
         digestToFilePaths = new ArrayListValuedHashMap<>();
     }

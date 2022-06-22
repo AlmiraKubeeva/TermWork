@@ -5,6 +5,6 @@ module userInterface {
     requires org.apache.commons.collections4;
 
 
-    opens userInterface to javafx.fxml;
-    exports userInterface;
+    opens ru.omsu.imit.userInterface to javafx.fxml;
+    exports ru.omsu.imit.userInterface;
 }

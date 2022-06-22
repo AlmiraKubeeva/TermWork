@@ -1,0 +1,5 @@
+.button {
+    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+    -fx-border-radius: 7px 7px 7px 7px;
+    -fx-background-radius: 7px 7px 7px 7px;
+}

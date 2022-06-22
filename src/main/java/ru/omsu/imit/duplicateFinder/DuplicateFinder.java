@@ -15,7 +15,7 @@ public class DuplicateFinder {
             return new DigestUtils(MD5).digestAsHex(file);
         } catch (IOException ex) {
             //throw new DuplicateFinderException(Duplicate)
-            return "error";
+            return "Error with MD5";
         }
     }
 
@@ -103,6 +103,8 @@ public class DuplicateFinder {
     }
 
     public static void rec(String dirName) throws DuplicateFinderException {
+        //LayoutController layoutController = new LayoutController();
+
         Validator.correctFileName(dirName);
         Validator.checkIsDir(dirName);
 

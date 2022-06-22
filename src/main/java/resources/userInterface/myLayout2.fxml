@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="292.0"  prefWidth="625.0" style="-fx-background-image: url(https://img.freepik.com/free-vector/horizontal-abstract-pastel-color-hologram-background-design_29865-3306.jpg);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.omsu.imit.userInterface.SecondLayoutController">
+   <children>
+      <TableView fx:id="tableDuplicates" layoutX="105.0" layoutY="78.0" styleClass="table-view" stylesheets="@../css/tableView.css" prefHeight="200.0" prefWidth="419.0">
+        <columns>
+          <TableColumn fx:id="hashColumn" prefWidth="98.0" style="-fx-background-color: #0000;" text="Hash" />
+          <TableColumn fx:id="filePathColumn" prefWidth="319.0" text="File path" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Text layoutX="91.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Table of duplicates" wrappingWidth="220.6689453125" />
+   </children>
+</AnchorPane>
