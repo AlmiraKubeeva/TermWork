@@ -3,49 +3,63 @@ package ru.omsu.imit.userInterface;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import ru.omsu.imit.duplicateFinder.Duplicate;
+import ru.omsu.imit.duplicateFinder.DuplicateFinderException;
 
 public class SecondLayoutController {
     private final ObservableList<Duplicate> duplicatesData = FXCollections.observableArrayList();
-
+    @FXML
+    public Button removeButton;
+    @FXML
+    public TextField pathField;
     @FXML
     private TableView<Duplicate> tableDuplicates;
 
     @FXML
-    private TableColumn<Duplicate, Integer> hashColumn;
+    private TableColumn<Duplicate, String> digestColumn;
     @FXML
     private TableColumn<Duplicate, String> filePathColumn;
 
-    // инициализируем форму данными
+    private Duplicate selectedRow;
+
     @FXML
     private void initialize() {
         initData();
-        // устанавливаем тип и значение которое должно хранится в колонке
-        hashColumn.setCellValueFactory(new PropertyValueFactory<Duplicate, Integer>("hash"));
+        digestColumn.setCellValueFactory(new PropertyValueFactory<Duplicate, String>("digest"));
         filePathColumn.setCellValueFactory(new PropertyValueFactory<Duplicate, String>("filePath"));
-        // заполняем таблицу данными
         tableDuplicates.setItems(duplicatesData);
+        System.out.println("Duplicates " + tableDuplicates.getItems());
     }
 
-    // подготавливаем данные для таблицы
-    // вы можете получать их с базы данных
+    @FXML
+    public void onMouseClickedRow(MouseEvent mouseEvent) {
+        this.selectedRow = tableDuplicates.getSelectionModel().getSelectedItem();
+        pathField.setText(selectedRow.getFilePath());
+    }
+
+    @FXML
+    public void onMouseClickedButtonRemoveFile(MouseEvent mouseEvent) throws DuplicateFinderException {
+        ClientInteraction clientInteraction = new ClientInteraction();
+        clientInteraction.setDeletableDuplicate(selectedRow);
+        duplicatesData.clear();
+        initData();
+    }
+    public void onMouseClickedButtonShowDeletedFiles(MouseEvent mouseEvent) throws Exception {
+        changeWindow();
+    }
+
     private void initData() {
         ClientInteraction clientInteraction = new ClientInteraction();
-        
-        duplicatesData.add(new Duplicate(4536, "путь 1"));
-        duplicatesData.add(new Duplicate(3555, "путь 2"));
-        duplicatesData.add(new Duplicate(9607, "путь 3"));
-        duplicatesData.add(new Duplicate(697, "путь 4"));
-        duplicatesData.add(new Duplicate(243, "путь 5"));
-        duplicatesData.add(new Duplicate(223, "путь 6"));
-        duplicatesData.add(new Duplicate(2573, "путь 7"));
-        duplicatesData.add(new Duplicate(23, "путь 8"));
-        duplicatesData.add(new Duplicate(2389, "путь 9"));
-        duplicatesData.add(new Duplicate(2083, "путь 10"));
-        duplicatesData.add(new Duplicate(213, "путь 11"));
-        duplicatesData.add(new Duplicate(4623, "путь 12"));
+        for (Duplicate duplicate : clientInteraction.getResultFiles()) {
+            duplicatesData.add(new Duplicate(duplicate.getDigest(), duplicate.getFilePath()));
+        }
+    }
+    public void changeWindow() throws Exception {
+        ThirdPage thirdPage = new ThirdPage();
+        thirdPage.showWindowToThirdPage();
     }
 
 }

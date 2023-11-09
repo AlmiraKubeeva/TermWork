@@ -14,12 +14,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FirstLayoutController implements Initializable {
-
-    //private String absolutePath;
-    private ClientInteraction clientInteraction;
     @FXML
     private AnchorPane anchorId;
-
     @FXML
     private TextField textField;
 
@@ -30,16 +26,12 @@ public class FirstLayoutController implements Initializable {
         Stage stage = (Stage) anchorId.getScene().getWindow();
         File file = directoryChooser.showDialog(stage);
         if (file != null) {
-            System.out.println("Ожидаемый: " + file.getAbsolutePath());
             localAbsolutePath = file.getAbsolutePath();
             textField.setText(localAbsolutePath);
-
         }
         if (localAbsolutePath != null) {
             ClientInteraction clientInteraction = new ClientInteraction();
             clientInteraction.setAbsolutePath(localAbsolutePath);
-            //проверка
-            System.out.println("Тот, что передали: "+clientInteraction.getAbsolutePath());
             changeWindow();
         }
     }
@@ -50,6 +42,6 @@ public class FirstLayoutController implements Initializable {
 
     public void changeWindow() throws Exception {
         SecondPage secondPage = new SecondPage();
-        secondPage.showWindow();
+        secondPage.showWindowToSecondPage();
     }
 }

@@ -15,7 +15,6 @@ public class SecondPage extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(SecondPage.class.getResource("/userInterface/myLayout2.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        //System.out.println(getClass().getResourceAsStream("/images/icon.png"));
         InputStream iconStream =
                 getClass().getResourceAsStream("/images/icon.png");
         Image image = new Image(iconStream);
@@ -30,7 +29,7 @@ public class SecondPage extends Application {
         launch();
     }
 
-    public void showWindow() throws Exception {
+    public void showWindowToSecondPage() throws Exception {
         start(stage);
     }
 

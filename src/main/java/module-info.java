@@ -7,4 +7,6 @@ module userInterface {
 
     opens ru.omsu.imit.userInterface to javafx.fxml;
     exports ru.omsu.imit.userInterface;
+    exports ru.omsu.imit.duplicateFinder;
+    opens ru.omsu.imit.duplicateFinder to javafx.fxml;
 }

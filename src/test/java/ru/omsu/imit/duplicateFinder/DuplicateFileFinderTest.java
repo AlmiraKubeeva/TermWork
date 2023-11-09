@@ -1,4 +1,4 @@
-package ru.omsu.imit.duplicateFinder;
+/**/package ru.omsu.imit.duplicateFinder;
 
 
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +9,7 @@ public class DuplicateFileFinderTest {
 
     @Test
     public void testEqualFilesInOneCatalog() {
-        //String fileName1 = "C:\\test\\testFile.txt";
+      /*  //String fileName1 = "C:\\test\\testFile.txt";
         String fileName2 = "/home/ekaterina/test";
         //File file1 = new File(fileName1);
        File file2 = new File(fileName2);
@@ -30,7 +30,8 @@ public class DuplicateFileFinderTest {
         //boolean res = file1.isDirectory();
 
         File[] files = file2.listFiles();
-        // Assertions.assertEquals(res1, res2);*/
+        // Assertions.assertEquals(res1, res2);
+        */
 
     }
 }
