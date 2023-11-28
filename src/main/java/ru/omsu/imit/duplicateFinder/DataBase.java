@@ -9,7 +9,6 @@ import java.util.List;
 
 public class DataBase {
     private static DataBase db;
-
     private final MultiValuedMap<String, String> digestToFilePaths;
     private final MultiValuedMap<String, String> deletedFilePaths;
 
@@ -48,6 +47,16 @@ public class DataBase {
         return duplicates;
     }
 
+    public void deleteFile(Duplicate duplicate) {
+        digestToFilePaths.removeMapping(duplicate.getDigest(), duplicate.getFilePath());
+        insertDeletedFiles(duplicate);
+    }
+
+    public void deleteFile(SortedDuplicate sortedDuplicate) {
+        digestToFilePaths.removeMapping(sortedDuplicate.getDigest(), sortedDuplicate.getFilePath());
+
+    }
+
     public Collection<SortedDuplicate> showAllFiles() {
         List<SortedDuplicate> allFiles = new ArrayList<>();
         for (String key : deletedFilePaths.keySet()) {
@@ -59,8 +68,5 @@ public class DataBase {
         return allFiles;
     }
 
-    public void deleteFile(Duplicate duplicate) {
-        digestToFilePaths.removeMapping(duplicate.getDigest(), duplicate.getFilePath());
-        insertDeletedFiles(duplicate);
-    }
+
 }

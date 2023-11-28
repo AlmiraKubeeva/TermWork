@@ -11,6 +11,8 @@ import java.util.Collection;
 
 
 public class DuplicateFinder {
+
+    private static String selectedDirPath;
     private static final DataBase db = DataBase.getDB();
 
     private static String getDigest(File file)
@@ -38,7 +40,7 @@ public class DuplicateFinder {
             throws DuplicateFinderException, IOException, NoSuchAlgorithmException {
         Validator.correctFileName(dirAbsPath);
         Validator.checkIsDir(dirAbsPath);
-
+        selectedDirPath = dirAbsPath;
         File dir = new File(dirAbsPath);
         File[] files = dir.listFiles();
 
@@ -57,4 +59,7 @@ public class DuplicateFinder {
         return db.showDuplicates();
     }
 
+    public String getSelectedDirPath() {
+        return selectedDirPath;
+    }
 }

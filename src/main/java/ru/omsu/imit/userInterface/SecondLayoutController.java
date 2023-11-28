@@ -58,6 +58,7 @@ public class SecondLayoutController {
         }
     }
     public void changeWindow() throws Exception {
+        removeButton.getScene().getWindow().hide();
         ThirdPage thirdPage = new ThirdPage();
         thirdPage.showWindowToThirdPage();
     }

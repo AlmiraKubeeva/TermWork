@@ -5,10 +5,18 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import ru.omsu.imit.duplicateFinder.Duplicate;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+import ru.omsu.imit.duplicateFinder.DuplicateFinder;
+import ru.omsu.imit.duplicateFinder.DuplicateFinderException;
 import ru.omsu.imit.duplicateFinder.SortedDuplicate;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ThirdLayoutController {
     private final ObservableList<SortedDuplicate> duplicatesData = FXCollections.observableArrayList();
@@ -22,6 +30,14 @@ public class ThirdLayoutController {
     private TableColumn<SortedDuplicate, String> digestColumn;
     @FXML
     private TableColumn<SortedDuplicate, String> filePathColumn;
+
+    @FXML
+    private AnchorPane anchorId3;
+
+    @FXML
+    public TextField pathField;
+
+    private SortedDuplicate selectedRow;
 
     @FXML
     private void initialize(){
@@ -40,12 +56,50 @@ public class ThirdLayoutController {
         }
     }
 
+    @FXML
+    public void onMouseClickedRow(MouseEvent mouseEvent) {
+        this.selectedRow = tableDeletedDuplicates.getSelectionModel().getSelectedItem();
+        pathField.setText(selectedRow.getFilePath());
+    }
+
+    @FXML
+    public void onMouseClickedButtonMoveFile(MouseEvent mouseEvent) throws DuplicateFinderException, IOException {
+        if(!selectedRow.getTypeFile().equals("deleted")) {
+            ClientInteraction clientInteraction = new ClientInteraction();
+            clientInteraction.setMovableFile(selectedRow, chooseDir());
+            //duplicatesData.clear();
+            initData();
+        }
+    }
+
+
+
     public void onMouseClickedButtonToTableOfDuplicates(MouseEvent mouseEvent) throws Exception {
         changeWindow();
     }
 
     public void changeWindow() throws Exception {
+        tableDeletedDuplicates.getScene().getWindow().hide();
         SecondPage secondPage = new SecondPage();
        secondPage.showWindowToSecondPage();
+    }
+
+    public String chooseDir() {
+        final DirectoryChooser directoryChooser = new DirectoryChooser();
+        Stage stage = (Stage) anchorId3.getScene().getWindow();
+        File file = directoryChooser.showDialog(stage);
+        /*if (file != null) {
+
+            localAbsolutePath = file.getAbsolutePath();
+            textField.setText(localAbsolutePath);
+        }
+        if (localAbsolutePath != null) {
+            ClientInteraction clientInteraction = new ClientInteraction();
+            clientInteraction.setAbsolutePath(localAbsolutePath);
+
+            changeWindow();
+
+        }*/
+        return file.getAbsolutePath();
     }
 }

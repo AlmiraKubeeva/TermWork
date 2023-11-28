@@ -3,6 +3,7 @@ package ru.omsu.imit.userInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
@@ -18,6 +19,8 @@ public class FirstLayoutController implements Initializable {
     private AnchorPane anchorId;
     @FXML
     private TextField textField;
+    @FXML
+    private Button browseButton;
 
     @FXML
     private void handleButtonAction(ActionEvent event) throws DuplicateFinderException, Exception {
@@ -32,6 +35,7 @@ public class FirstLayoutController implements Initializable {
         if (localAbsolutePath != null) {
             ClientInteraction clientInteraction = new ClientInteraction();
             clientInteraction.setAbsolutePath(localAbsolutePath);
+
             changeWindow();
         }
     }
@@ -41,6 +45,7 @@ public class FirstLayoutController implements Initializable {
     }
 
     public void changeWindow() throws Exception {
+        anchorId.getScene().getWindow().hide();
         SecondPage secondPage = new SecondPage();
         secondPage.showWindowToSecondPage();
     }

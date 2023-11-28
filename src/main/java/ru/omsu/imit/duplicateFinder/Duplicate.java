@@ -1,5 +1,7 @@
 package ru.omsu.imit.duplicateFinder;
 
+import java.io.File;
+
 public class Duplicate {
     private String digest;
     private String filePath;
@@ -24,4 +26,5 @@ public class Duplicate {
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
+
 }

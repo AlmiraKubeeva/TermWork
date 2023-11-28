@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="275.0" prefWidth="553.0" styleClass="background" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.omsu.imit.userInterface.FirstLayoutController">
+<AnchorPane id="AnchorPane" fx:id="anchorId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="275.0" prefWidth="553.0" styleClass="background" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.omsu.imit.userInterface.FirstLayoutController">
     <children>
-        <Button layoutX="376.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="86.0" styleClass="button" stylesheets="@../css/button.css" text="Browse">
+        <Button fx:id="browseButton" layoutX="376.0" layoutY="144.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="31.0" prefWidth="86.0" styleClass="button" stylesheets="@../css/button.css" text="Browse">
          <font>
             <Font size="15.0" />
          </font></Button>
         <TextField fx:id="textField" alignment="TOP_LEFT" layoutX="84.0" layoutY="145.0" prefHeight="29.0" prefWidth="281.0" styleClass="textField" stylesheets="@../css/textField.css" />
-        <Label alignment="CENTER" layoutX="84.0" layoutY="86.0" prefHeight="26.0" prefWidth="385.0" text="Select the folder where you want to check for duplicates">
+        <Label alignment="CENTER" layoutX="84.0" layoutY="77.0" prefHeight="32.0" prefWidth="378.0" text="Select the folder where you want to check for duplicates">
          <font>
             <Font size="15.0" />
          </font></Label>

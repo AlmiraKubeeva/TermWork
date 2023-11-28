@@ -29,7 +29,13 @@ public class ClientInteraction {
     }
 
 
-    public void setDeletableDuplicate(Duplicate deletableDuplicate) throws DuplicateFinderException {
-        FileUtils.deleteFile(deletableDuplicate);
+    public void setDeletableDuplicate(Duplicate deletableDuplicate)
+            throws DuplicateFinderException {
+        FileUtils.deleteDuplicate(deletableDuplicate);
+    }
+
+    public void setMovableFile(SortedDuplicate file, String movingFilePath)
+            throws IOException, DuplicateFinderException {
+        FileUtils.moveFile(file, movingFilePath);
     }
 }
