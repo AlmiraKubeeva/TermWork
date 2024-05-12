@@ -8,7 +8,8 @@
     <children>
         <TableView fx:id="tableDuplicates" layoutX="121.0" layoutY="69.0" onMouseClicked="#onMouseClickedRow" prefHeight="338.0" prefWidth="725.0" styleClass="table-view" stylesheets="@../css/tableView.css">
             <columns>
-                <TableColumn fx:id="digestColumn" prefWidth="230.00000762939453" text="Hash" />
+            <TableColumn fx:id="uuidColumn" prefWidth="161.33334350585938" text="UUID" />
+                <TableColumn fx:id="digestColumn" prefWidth="321.33331298828125" text="Hash" />
                 <TableColumn fx:id="filePathColumn" prefWidth="493.3333435058594" text="File path" />
             </columns>
             <columnResizePolicy>
@@ -26,14 +27,18 @@
          </font></Label>
         <TextField fx:id="pathField" layoutX="127.0" layoutY="392.0" prefHeight="26.0" prefWidth="725.0" styleClass="textField" stylesheets="@../css/textField.css" />
         -->
-        <Button fx:id="removeButton" layoutX="526.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#onMouseClickedButtonRemoveFile" prefHeight="30.0" prefWidth="227.0" styleClass="button" stylesheets="@../css/button.css" text="Remove file">
+        <Button fx:id="removeButton" layoutX="340.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#onMouseClickedButtonRemoveFile" prefHeight="38.0" prefWidth="118.0" styleClass="button" stylesheets="@../css/button.css" text="Remove file">
          <font>
             <Font size="17.0" />
          </font></Button>
-      <Button fx:id="showButton" layoutX="224.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#onMouseClickedButtonShowDeletedFiles" prefHeight="38.0" prefWidth="227.0" stylesheets="@../css/button.css" text="Show (not) deleted files">
+      <Button fx:id="showButton" layoutX="121.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#onMouseClickedButtonShowDeletedFiles" prefHeight="38.0" prefWidth="203.0" stylesheets="@../css/button.css" text="Show (not) deleted files">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
+        <Button fx:id="removeAllDuplicatesButton" layoutX="469.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#onMouseClickedButtonRemoveAllDuplicates" prefHeight="30.0" prefWidth="227.0" styleClass="button" stylesheets="@../css/button.css" text="Remove all duplicates">
+            <font>
+                <Font size="17.0" />
+            </font></Button>
     </children>
 </AnchorPane>

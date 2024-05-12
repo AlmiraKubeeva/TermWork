@@ -8,12 +8,14 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
+import java.util.UUID;
 
 
 public class DuplicateFinder {
 
     private static String selectedDirPath;
     private static final DataBase db = DataBase.getDB();
+    private static int countOfFiles = 0;
 
     private static String getDigest(File file)
             throws IOException, NoSuchAlgorithmException {
@@ -36,6 +38,25 @@ public class DuplicateFinder {
         }
     }
 
+    public static int getCountOfFiles(String dirAbsPath)
+            throws DuplicateFinderException, IOException, NoSuchAlgorithmException {
+        Validator.correctFileName(dirAbsPath);
+        Validator.checkIsDir(dirAbsPath);
+        selectedDirPath = dirAbsPath;
+        File dir = new File(dirAbsPath);
+        File[] files = dir.listFiles();
+
+        for (File file : files) {
+            if (file.isDirectory()) {
+                getCountOfFiles(file.getAbsolutePath());
+            } else {
+                countOfFiles += 1;
+            }
+        }
+
+        return countOfFiles;
+    }
+
     public static void addAllFilesFromDirToDB(String dirAbsPath)
             throws DuplicateFinderException, IOException, NoSuchAlgorithmException {
         Validator.correctFileName(dirAbsPath);
@@ -51,6 +72,7 @@ public class DuplicateFinder {
                 } else {
                     String digest = DuplicateFinder.getDigest(file);
                     db.insert(digest, file.getAbsolutePath());
+                    //add uuid
                 }
             }
         }

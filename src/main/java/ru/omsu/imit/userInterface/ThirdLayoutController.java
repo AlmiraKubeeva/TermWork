@@ -11,25 +11,25 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import ru.omsu.imit.duplicateFinder.DuplicateFinder;
-import ru.omsu.imit.duplicateFinder.DuplicateFinderException;
-import ru.omsu.imit.duplicateFinder.SortedDuplicate;
+import ru.omsu.imit.duplicateFinder.*;
 
 import java.io.File;
 import java.io.IOException;
 
 public class ThirdLayoutController {
-    private final ObservableList<SortedDuplicate> duplicatesData = FXCollections.observableArrayList();
+    private final ObservableList<Duplicate> duplicatesData = FXCollections.observableArrayList();
 
     @FXML
-    private TableView<SortedDuplicate> tableDeletedDuplicates;
+    private TableView<Duplicate> tableDeletedDuplicates;
 
     @FXML
-    private TableColumn<SortedDuplicate, String> typeFileColumn;
+    private TableColumn<Duplicate, String> typeFileColumn;
     @FXML
-    private TableColumn<SortedDuplicate, String> digestColumn;
+    private TableColumn<Duplicate, String> digestColumn;
     @FXML
-    private TableColumn<SortedDuplicate, String> filePathColumn;
+    private TableColumn<Duplicate, String> filePathColumn;
+    @FXML
+    private TableColumn<Duplicate, String> descriptionColumn;
 
     @FXML
     private AnchorPane anchorId3;
@@ -37,22 +37,22 @@ public class ThirdLayoutController {
     @FXML
     public TextField pathField;
 
-    private SortedDuplicate selectedRow;
+    private Duplicate selectedRow;
 
     @FXML
     private void initialize(){
         initData();
-        typeFileColumn.setCellValueFactory(new PropertyValueFactory<SortedDuplicate, String>("typeFile"));
-        digestColumn.setCellValueFactory(new PropertyValueFactory<SortedDuplicate, String>("digest"));
-        filePathColumn.setCellValueFactory(new PropertyValueFactory<SortedDuplicate, String>("filePath"));
+        digestColumn.setCellValueFactory(new PropertyValueFactory<Duplicate, String>("digest"));
+        filePathColumn.setCellValueFactory(new PropertyValueFactory<Duplicate, String>("filePath"));
+        typeFileColumn.setCellValueFactory(new PropertyValueFactory<Duplicate, String>("typeFile"));
         tableDeletedDuplicates.setItems(duplicatesData);
         System.out.println("Duplicates " + tableDeletedDuplicates.getItems());
     }
 
     private void initData(){
         ClientInteraction clientInteraction = new ClientInteraction();
-        for (SortedDuplicate duplicate : clientInteraction.getResultSortedFiles()) {
-            duplicatesData.add(new SortedDuplicate(duplicate.getTypeFile(),duplicate.getDigest(),duplicate.getFilePath()));
+        for (Duplicate duplicate : clientInteraction.getResultSortedFiles()) {
+            duplicatesData.add(new Duplicate(duplicate.getDigest(),duplicate.getFilePath(), duplicate.getTypeFile()));
         }
     }
 
@@ -63,12 +63,21 @@ public class ThirdLayoutController {
     }
 
     @FXML
-    public void onMouseClickedButtonMoveFile(MouseEvent mouseEvent) throws DuplicateFinderException, IOException {
-        if(!selectedRow.getTypeFile().equals("deleted")) {
+    public void onMouseClickedDescriptionCell(MouseEvent mouseEvent) {
+        
+    }
+
+    @FXML
+    public void onMouseClickedButtonMoveFile(MouseEvent mouseEvent) throws DuplicateFinderException, Exception {
+        if("not deleted".equals(selectedRow.getTypeFile())) {
             ClientInteraction clientInteraction = new ClientInteraction();
-            clientInteraction.setMovableFile(selectedRow, chooseDir());
-            //duplicatesData.clear();
-            initData();
+
+            String absPath = clientInteraction.setMovableFile(selectedRow, chooseDir());
+            DataBase db = DataBase.getDB();
+            db.setPathInRow(selectedRow.getDigest(), selectedRow.getFilePath(), absPath);
+            anchorId3.getScene().getWindow().hide();
+            ThirdPage thirdPage = new ThirdPage();
+            thirdPage.showWindowToThirdPage();
         }
     }
 

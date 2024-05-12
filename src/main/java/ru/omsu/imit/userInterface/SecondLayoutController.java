@@ -18,6 +18,9 @@ public class SecondLayoutController {
     @FXML
     private TableView<Duplicate> tableDuplicates;
 
+
+    @FXML
+    private TableColumn<Duplicate, String> uuidColumn;
     @FXML
     private TableColumn<Duplicate, String> digestColumn;
     @FXML
@@ -28,6 +31,7 @@ public class SecondLayoutController {
     @FXML
     private void initialize() {
         initData();
+        uuidColumn.setCellValueFactory(new PropertyValueFactory<Duplicate, String>("uuid"));
         digestColumn.setCellValueFactory(new PropertyValueFactory<Duplicate, String>("digest"));
         filePathColumn.setCellValueFactory(new PropertyValueFactory<Duplicate, String>("filePath"));
         tableDuplicates.setItems(duplicatesData);
@@ -47,6 +51,15 @@ public class SecondLayoutController {
         duplicatesData.clear();
         initData();
     }
+
+    @FXML
+    public void onMouseClickedButtonRemoveAllDuplicates(MouseEvent mouseEvent) throws DuplicateFinderException {
+        ClientInteraction clientInteraction = new ClientInteraction();
+        clientInteraction.removeAllDuplicates(selectedRow);
+        duplicatesData.clear();
+        initData();
+    }
+
     public void onMouseClickedButtonShowDeletedFiles(MouseEvent mouseEvent) throws Exception {
         changeWindow();
     }
@@ -54,7 +67,7 @@ public class SecondLayoutController {
     private void initData() {
         ClientInteraction clientInteraction = new ClientInteraction();
         for (Duplicate duplicate : clientInteraction.getResultFiles()) {
-            duplicatesData.add(new Duplicate(duplicate.getDigest(), duplicate.getFilePath()));
+            duplicatesData.add(new Duplicate(duplicate.getDigest(), duplicate.getFilePath(), duplicate.getTypeFile()));
         }
     }
     public void changeWindow() throws Exception {

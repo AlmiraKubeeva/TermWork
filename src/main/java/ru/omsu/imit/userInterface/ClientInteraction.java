@@ -10,6 +10,10 @@ public class ClientInteraction {
     private String absolutePath;
     private Collection<String> resultFiles;
 
+    public void addDirPath(String path) {
+        FileUtils.addDirPath(path);
+    }
+
     public void setAbsolutePath(String path) throws DuplicateFinderException, IOException, NoSuchAlgorithmException {
         this.absolutePath = path;
         DuplicateFinder.addAllFilesFromDirToDB(absolutePath);
@@ -24,7 +28,7 @@ public class ClientInteraction {
         return DataBase.getDB().showDuplicates();
     }
 
-    public Collection<SortedDuplicate> getResultSortedFiles() {
+    public Collection<Duplicate> getResultSortedFiles() {
         return DataBase.getDB().showAllFiles();
     }
 
@@ -34,8 +38,13 @@ public class ClientInteraction {
         FileUtils.deleteDuplicate(deletableDuplicate);
     }
 
-    public void setMovableFile(SortedDuplicate file, String movingFilePath)
+    public String setMovableFile(Duplicate file, String movingFilePath)
             throws IOException, DuplicateFinderException {
-        FileUtils.moveFile(file, movingFilePath);
+        String s = FileUtils.moveFile(file, movingFilePath);
+        return s;
+    }
+
+    public void removeAllDuplicates(Duplicate mainFile) throws DuplicateFinderException {
+        FileUtils.deleteAllDuplicates(mainFile);
     }
 }
